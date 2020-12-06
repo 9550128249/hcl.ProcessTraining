@@ -1,12 +1,17 @@
-package hcl.interfacehandson;
+package hcl.java8features;
 
-public class Square implements Polygon {
-	public double calcPeri(double len, double bre) {
-		return 4 * len;
-	}
+import java.util.Scanner;
 
-	public double Area(double len, double bre) {
-		return (len * bre);
+public class Square {
+
+	public static void main(String[] args) {
+		int a;
+		Scanner s=new Scanner(System.in);
+		System.out.println("enter the number");
+		a=s.nextInt();
+		Int i=no->no*no;
+		System.out.println("the square is:"+i.square(a));
+
 	}
 
 }

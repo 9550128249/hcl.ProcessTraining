@@ -1,41 +1,71 @@
-package hcl.assignmentp7;
+package hcl.test;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
-import java.util.Scanner;
-
-import java.util.*;
+import hcl.domain.Customer;
+import hcl.service.ProductService;
+import hcl.service.ProductServiceImpl;
 
 public class Test {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Long over;
-		Long ball;
-		Long runs;
-		String batsman;
-		String bowler;
-		String nonStriker;
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the over");
-		over=sc.nextLong();
-		System.out.println("Enter the ball");
-		ball=sc.nextLong();
-		System.out.println("Enter the runs");
-		runs=sc.nextLong();
-		sc.nextLine();
-		System.out.println("Enter the batsman");
-		batsman=sc.nextLine();
-		System.out.println("Enter the bowler");
-		bowler=sc.nextLine();
-		System.out.println("Enter the nonStriker");
-		nonStriker=sc.nextLine();
-		Delivery d=new Delivery(over,ball,runs,batsman,bowler,nonStriker);
-		System.out.println("over:"+d.getOver());
-		System.out.println("ball:"+d.getBall());
-		System.out.println("runs:"+d.getRuns());
-		System.out.println("batsman:"+d.getBatsman());
-		System.out.println("bowler:"+d.getBowler());
-		System.out.println("nonstriker:"+d.getNonStriker());
+public static void main(String[] args) throws NumberFormatException, IOException {
 
-	}
+ProductService service=new ProductServiceImpl();
+BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+int ch;
+do
+{
+System.out.println("1.Insert");
+System.out.println("2.Delete");
+System.out.println("3.Display");
+System.out.println("4.exit");
+System.out.println("Enter your choice");
+ch=Integer.parseInt(br.readLine());
+switch(ch)
+{
+case 1:
+System.out.println("Enter the product details");
+boolean b=service.addCustomer(getObject(br));
+if(b)
+System.out.println("Inserted Successfully");
+else
+System.out.println("Not inserted ");
+break;
+case 2:
+System.out.println("enter the customer id to delete");
+int id=Integer.parseInt(br.readLine());
+boolean b1=service.deleteCustomer(id);
+if(b1)
+System.out.println("deleted successfully");
+else
+System.out.println("not deleted");
+break;
+case 3:
+List<Customer> customers=service.getCustomers();
+System.out.println("the product are");
+displayCustomers(customers);
+break;
 
+}
+
+
+}while(ch<=3);
+}
+private static Customer getObject(BufferedReader br) throws NumberFormatException, IOException {
+int id;
+String name,address;
+id=Integer.parseInt(br.readLine());
+name=br.readLine();
+address=br.readLine();
+return new Customer(id, name, address);
+}
+private static void displayCustomers(List<Customer> customers)
+{
+for(Customer customer:customers)
+{
+System.out.println(customer);
+}
+}
 }
