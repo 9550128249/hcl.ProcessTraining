@@ -1,11 +1,15 @@
-package org.hcl.maven3;
-import org.springframework.*;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+package org.hcl.shoppingcart;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.hcl.shoppingcart.*;
 public class Test {
-	public static void main(String[] args) {
-	ApplicationContext context=new ClassPathXmlApplicationContext("spring-beans.xml");
-	College1 e=context.getBean(College1.class);
-	System.out.println(e.getCoursesoffered());
-	}
+public static void main(String[] args) {
+ClassPathResource resource=new ClassPathResource("/ShoppingCart/src/main/resources/spring-beans.xml");
+XmlBeanFactory factory= new XmlBeanFactory(resource);
+     ShoppingCart shoppingCart =(ShoppingCart)factory.getBean("shoppingCart");
+Cashier cashier=(Cashier)factory.getBean("cashier");
+cashier.calculateTotalPrice(shoppingCart);
+}
 }
